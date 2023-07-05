@@ -1,0 +1,44 @@
+<div [ngSwitch]="inputModel.type" class="dynamic-input">
+    <!-- Text Input -->
+    <mat-form-field *ngSwitchCase="'text'" class="mat-form-field-flex">
+      <mat-label>{{inputModel.label}}</mat-label>
+      <input matInput [(ngModel)]="inputModel.value" placeholder="{{inputModel.placeholder}}" />
+    </mat-form-field>
+  
+    <!-- Number Input -->
+    <mat-form-field *ngSwitchCase="'number'" class="mat-form-field-flex">
+      <mat-label>{{inputModel.label}}</mat-label>
+      <input matInput [(ngModel)]="inputModel.value" type="number" placeholder="{{inputModel.placeholder}}" />
+    </mat-form-field>
+  
+    <!-- Date Input -->
+    <mat-form-field *ngSwitchCase="'date'" class="mat-form-field-flex">
+      <mat-label>{{inputModel.label}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="inputModel.value" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+    <!-- Checkbox -->
+    <mat-checkbox *ngSwitchCase="'checkbox'" [(ngModel)]="inputModel.value" class="mat-form-field-flex">{{inputModel.label}}</mat-checkbox>
+  
+    <!-- Dropdown -->
+    <mat-form-field *ngSwitchCase="'select'" class="mat-form-field-flex">
+      <mat-label>{{inputModel.label}}</mat-label>
+      <mat-select [(ngModel)]="inputModel.value">
+        <mat-option *ngFor="let option of inputModel.options" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Radio Buttons -->
+    <mat-radio-group *ngSwitchCase="'radio'" [(ngModel)]="inputModel.value" class="mat-form-field-flex">
+      <mat-radio-button *ngFor="let option of inputModel.options" [value]="option">{{option}}</mat-radio-button>
+    </mat-radio-group>
+
+    <button mat-icon-button color="warn" (click)="onRemove()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  

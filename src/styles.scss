@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .dynamic-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 5px;
+  }
+  
+  .mat-form-field-flex {
+    flex: 1;
+  }

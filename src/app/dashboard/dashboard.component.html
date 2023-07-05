@@ -1,0 +1,11 @@
+<div *ngIf="userDetails">
+    <h1>Welcome to the Dashboard, {{ userDetails.displayName }}</h1>
+    <img *ngIf="userDetails?.photoURL" [src]="userDetails.photoURL" alt="Profile Picture" width="150" height="150" />
+    <p>Email: {{ userDetails.email }}</p>
+    <p *ngIf="userDetails.phoneNumber">Phone: {{ userDetails.phoneNumber }}</p>
+    <!-- Add any additional content you want to display on the dashboard -->
+  </div>
+  <div class="input-container" style="display: flex; flex-wrap: wrap;">
+    <app-dynamic-input *ngFor="let field of fields" [inputModel]="field" [ngStyle]="{ 'flex': '0 0 ' + field.alignment + '%', 'box-sizing': 'border-box', 'padding': '0 5px' }"></app-dynamic-input>
+  </div>
+  

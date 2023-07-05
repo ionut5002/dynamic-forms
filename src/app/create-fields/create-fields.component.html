@@ -1,0 +1,63 @@
+
+<form [formGroup]="formTitleGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Form</mat-label>
+      <mat-select formControlName="formId">
+        <mat-option *ngFor="let form of forms" [value]="form.id">{{ form.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="loadForm()">Load</button>
+  </form>
+  
+
+<div>
+    <mat-form-field appearance="fill">
+      <mat-label>Form Title</mat-label>
+      <input matInput [(ngModel)]="formTitle">
+    </mat-form-field>
+  </div>
+<form [formGroup]="fieldForm" (ngSubmit)="addFieldToArray(fieldForm)">
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let type of fieldTypes" [value]="type">{{ type }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Label</mat-label>
+      <input matInput formControlName="label" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Alignment</mat-label>
+      <mat-select formControlName="alignment">
+        <mat-option *ngFor="let alignment of alignments" [value]="alignment">{{ alignment }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <ng-container *ngIf="['select', 'radio'].includes(fieldForm.get('type')?.value ?? '')">
+      <h3>Options</h3>
+      <mat-form-field appearance="outline">
+        <mat-label>Option</mat-label>
+        <input #optionInput matInput />
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="addFieldOption(optionInput.value); optionInput.value = ''">Add Option</button>
+  
+      <div *ngIf="(fieldForm.get('options')?.value ?? []).length > 0">
+        <h4>Added Options</h4>
+        <ul>
+          <li *ngFor="let option of fieldForm.get('options')?.value">{{ option }}</li>
+        </ul>
+      </div>
+    </ng-container>
+  
+    <button mat-raised-button color="accent" type="submit" [disabled]="fieldForm.invalid">Add Field</button>
+  </form>
+
+  <button mat-raised-button color="primary" (click)="saveFields()">Save Fields</button>
+  <button mat-raised-button color="primary" (click)="updateForm()" *ngIf="selectedFormId">Update Form</button>
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="fields" class="input-container" style="display: flex; flex-wrap: wrap;">
+    <div *ngFor="let field of fields; let i = index" cdkDrag [cdkDragData]="i">
+      <app-dynamic-input [inputModel]="field" (remove)="removeField(i)" [ngStyle]="{ 'flex': '0 0 ' + field.alignment + '%', 'box-sizing': 'border-box', 'padding': '0 5px' }"></app-dynamic-input>
+    </div>
+  </div>

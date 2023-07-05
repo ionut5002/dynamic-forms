@@ -1,0 +1,16 @@
+<h2>Edit Profile</h2>
+<form (ngSubmit)="updateProfile()">
+  <div>
+    <label for="displayName">Display Name:</label>
+    <input [(ngModel)]="updatedDisplayName" name="displayName" id="displayName" type="text" />
+  </div>
+  <div>
+    <label for="phoneNumber">Phone Number:</label>
+    <input [(ngModel)]="updatedphoneNumber" name="phoneNumber" id="phoneNumber" type="text" />
+  </div>
+  <div>
+    <label for="profilePicture">Profile Picture:</label>
+    <input type="file" (change)="onFileSelected($event)" id="profilePicture" />
+  </div>
+  <button type="submit">Update Profile</button>
+</form>

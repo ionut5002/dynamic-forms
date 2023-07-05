@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "form-builder-app": {
+      "hosting": {
+        "my-pwa-app": [
+          "form-builder-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "form-builder-app"
+  }
+}

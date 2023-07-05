@@ -1,0 +1,31 @@
+<form [formGroup]="formTitleGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Form</mat-label>
+      <mat-select formControlName="formId">
+        <mat-option *ngFor="let form of forms" [value]="form.id">{{ form.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="loadForm()">Load</button>
+  </form>
+
+  <form [formGroup]="templateTitleGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Template</mat-label>
+      <mat-select formControlName="templateId">
+        <mat-option *ngFor="let teamplate of templates" [value]="teamplate.id">{{ teamplate.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="loadTemplate()">NEW</button>
+  </form>
+
+  
+  <form [formGroup]="filledForm" *ngIf="form && editMode">
+        <app-dynamic-input *ngFor="let field of form.fields; index as i" [control]="filledForm.get(field.label)" [inputModel]="field" [ngStyle]="{ 'flex': '0 0 ' + field.alignment + '%', 'box-sizing': 'border-box', 'padding': '0 5px' }"></app-dynamic-input> 
+    <button (click)="saveFilledForm()">Save Filled Form</button>
+  </form>
+
+  <form [formGroup]="filledForm" *ngIf="template && !editMode">
+    <app-dynamic-input *ngFor="let field of template.fields; index as i" [control]="filledForm.get(field.label)" [inputModel]="field" [ngStyle]="{ 'flex': '0 0 ' + field.alignment + '%', 'box-sizing': 'border-box', 'padding': '0 5px' }"></app-dynamic-input> 
+<button (click)="saveFilledForm()">Save Filled Form</button>
+</form>
+  
